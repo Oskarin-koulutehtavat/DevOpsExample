@@ -23,29 +23,6 @@ public class Matrix {
     return this.array[0].length;
   }
 
-  public static Matrix multiply(Matrix matrix, double scalar) {
-
-    Matrix multipliedMatrix = new Matrix(matrix.height(), matrix.width());
-
-    for (int m = 0; m < matrix.height(); m++) {
-      for (int n = 0; n < matrix.width(); n++) {
-        multipliedMatrix.array[m][n] = matrix.array[m][n] * scalar;
-      }
-    }
-
-    return multipliedMatrix;
-  }
-  public Matrix multiply(double scalar) {
-    return multiply(this, scalar);
-  }
-
-  public static Matrix divide(Matrix matrix, double scalar) {
-    return multiply(matrix, 1 / scalar);
-  }
-  public Matrix divide(double scalar) {
-    return divide(this,scalar);
-  }
-
   public static Matrix transpose(Matrix matrix) {
 
     Matrix transposedMatrix = new Matrix(matrix.width(), matrix.height());
@@ -77,6 +54,22 @@ public class Matrix {
     return productsum;
   }
 
+  public static Matrix multiply(Matrix matrix, double scalar) {
+
+    Matrix multipliedMatrix = new Matrix(matrix.height(), matrix.width());
+
+    for (int m = 0; m < matrix.height(); m++) {
+      for (int n = 0; n < matrix.width(); n++) {
+        multipliedMatrix.array[m][n] = matrix.array[m][n] * scalar;
+      }
+    }
+
+    return multipliedMatrix;
+  }
+  public Matrix multiply(double scalar) {
+    return multiply(this, scalar);
+  }
+ 
   public static Matrix multiply(Matrix matrixA, Matrix matrixB) {
 
     if (matrixA.height() != matrixB.width()) {
@@ -97,6 +90,13 @@ public class Matrix {
   }
   public Matrix multiply(Matrix matrix) {
     return multiply(this,matrix);
+  }
+
+  public static Matrix divide(Matrix matrix, double scalar) {
+    return multiply(matrix, 1 / scalar);
+  }
+  public Matrix divide(double scalar) {
+    return divide(this,scalar);
   }
 
   public static Matrix add(Matrix matrixA, Matrix matrixB) {
