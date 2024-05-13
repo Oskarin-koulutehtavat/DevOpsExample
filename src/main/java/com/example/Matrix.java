@@ -98,14 +98,6 @@ public class Matrix {
         return multiply(this, matrix);
     }
 
-    public static Matrix divide(Matrix matrix, double scalar) {
-        return multiply(matrix, 1 / scalar);
-    }
-
-    public Matrix divide(double scalar) {
-        return divide(this, scalar);
-    }
-
     public static Matrix add(Matrix matrixA, Matrix matrixB) {
 
         if (matrixA.height() != matrixB.height() || matrixA.width() != matrixB.width()) {
@@ -166,11 +158,13 @@ public class Matrix {
         Matrix subMatrix = new Matrix(matrix.height() - 1, matrix.width() - 1);
 
         for (int m = 0; m < matrix.height(); m++) {
-            if (m == i - 1)
+            if (m == i - 1) {
                 continue;
+            }
             for (int n = 0; n < matrix.width(); n++) {
-                if (n == j - 1)
+                if (n == j - 1) {
                     continue;
+                }
                 int mM = m < i ? m : m - 1;
                 int nM = n < j ? n : n - 1;
                 subMatrix.array[mM][nM] = matrix.array[m][n];
@@ -213,6 +207,27 @@ public class Matrix {
 
     public double determinant() {
         return determinant(this);
+    }
+
+    public static Matrix divide(Matrix matrix, double scalar) {
+        return multiply(matrix, 1 / scalar);
+    }
+
+    public Matrix divide(double scalar) {
+        return divide(this, scalar);
+    }
+
+    public static Matrix divide(Matrix matrixA, Matrix matrixB) {
+
+        if (matrixA.determinant() == 0 || matrixB.determinant() == 0) {
+            throw new IllegalArgumentException("Division not possible (a determinant is zero)");
+        }
+
+        return multiply(matrixA, matrixB.inverse());
+    }
+
+    public Matrix divide(Matrix matrix) {
+        return divide(this, matrix);
     }
 
     public static double minor(Matrix matrix, int i, int j) {
@@ -285,40 +300,40 @@ public class Matrix {
             throw new IllegalArgumentException("Non-square matrices can only be raised to a power greater than zero");
         }
 
-        if (power == 0)
+        if (power == 0) {
             return identity(matrix.height());
+        }
 
         Matrix powerMatrix;
 
         if (power < 0) {
             powerMatrix = matrix.inverse();
-            power *= -1;
         } else {
             powerMatrix = matrix;
         }
 
-        for (int a = 1; a < power; a++) {
-            powerMatrix = powerMatrix.multiply(matrix);
-        }
+        /*
+         * for (int a = 1; a < Math.abs(power); a++) {
+         * powerMatrix = powerMatrix.multiply(matrix);
+         * }
+         */
 
-        return powerMatrix;
+        int y = Math.abs(power);
+        Matrix z = Matrix.identity(matrix.height());
+        while (y > 0) {
+            if (y % 2 == 1) {
+                z.multiply(powerMatrix);
+            }
+            powerMatrix.multiply(powerMatrix);
+            y = y >> 1;
+        }
+        return z;
+
+        // return powerMatrix;
     }
 
     public Matrix power(int power) {
         return power(this, power);
-    }
-
-    public static Matrix divide(Matrix matrixA, Matrix matrixB) {
-
-        if (matrixA.determinant() == 0 || matrixB.determinant() == 0) {
-            throw new IllegalArgumentException("Division not possible (a determinant is zero)");
-        }
-
-        return multiply(matrixA, matrixB.inverse());
-    }
-
-    public Matrix divide(Matrix matrix) {
-        return divide(this, matrix);
     }
 
     public static double trace(Matrix matrix) {
@@ -350,13 +365,15 @@ public class Matrix {
 
             for (int n = 0; n < this.width(); n++) {
                 stringForm.append(this.array[m][n]);
-                if (n != this.width() - 1)
+                if (n != this.width() - 1) {
                     stringForm.append(",");
+                }
             }
 
             stringForm.append("]");
-            if (m != this.height() - 1)
+            if (m != this.height() - 1) {
                 stringForm.append("\n");
+            }
         }
 
         return stringForm.toString();
@@ -369,10 +386,12 @@ public class Matrix {
 
     @Override
     public boolean equals(Object object) {
-        if (object == this)
+        if (object == this) {
             return true;
-        if (object == null || this.getClass() != object.getClass())
+        }
+        if (object == null || this.getClass() != object.getClass()) {
             return false;
+        }
         Matrix matrixObject = (Matrix) object;
         return Arrays.deepEquals(array, matrixObject.array);
     }
