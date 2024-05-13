@@ -2,30 +2,68 @@ package com.example;
 
 import java.util.Arrays;
 
+/**
+ * Matrix.
+ */
 public class Matrix {
 
+    /**
+     * Matrix contents.
+     */
     private double[][] array;
 
+    /**
+     * Creates an empty matrix.
+     *
+     * @param height
+     * @param width
+     */
     public Matrix(int height, int width) {
         this.array = new double[height][width];
     }
 
+    /**
+     * Creates a matrix from a 2D array of numbers.
+     *
+     * @param array
+     */
     public Matrix(double[][] array) {
         this.array = array;
     }
 
+    /**
+     * Clones a matrix.
+     *
+     * @param matrix
+     */
     public Matrix(Matrix matrix) {
         this.array = matrix.array;
     }
 
+    /**
+     * Number of rows in the matrix.
+     *
+     * @return heigth
+     */
     public int height() {
         return this.array.length;
     }
 
+    /**
+     * Number of columns in the matrix.
+     *
+     * @return width
+     */
     public int width() {
         return this.array[0].length;
     }
 
+    /**
+     * Flips a matrix along the main diagonal.
+     *
+     * @param matrix
+     * @return transposed matrix
+     */
     public static Matrix transpose(Matrix matrix) {
 
         Matrix transposedMatrix = new Matrix(matrix.width(), matrix.height());
@@ -39,11 +77,24 @@ public class Matrix {
         return transposedMatrix;
     }
 
+    /**
+     * Flips the matrix along the main diagonal.
+     *
+     * @return transposed matrix
+     */
     public Matrix transpose() {
         return transpose(this);
     }
 
-    public static double dot(double[] vectorA, double[] vectorB) {
+    /**
+     * Multiply and add elements of two vectors together. Vectors have to have the
+     * same number of elements.
+     *
+     * @param vectorA
+     * @param vectorB
+     * @return scalar product
+     */
+    private static double dot(double[] vectorA, double[] vectorB) {
 
         if (vectorA.length != vectorB.length) {
             throw new IllegalArgumentException("Vectors are not the same dimension");
@@ -58,6 +109,13 @@ public class Matrix {
         return productsum;
     }
 
+    /**
+     * Multiplies a matrix by a scalar.
+     *
+     * @param matrix
+     * @param scalar
+     * @return multiplied matrix
+     */
     public static Matrix multiply(Matrix matrix, double scalar) {
 
         Matrix multipliedMatrix = new Matrix(matrix.height(), matrix.width());
@@ -71,10 +129,24 @@ public class Matrix {
         return multipliedMatrix;
     }
 
+    /**
+     * Multiplies the matrix by a scalar.
+     *
+     * @param scalar
+     * @return multiplied matrix
+     */
     public Matrix multiply(double scalar) {
         return multiply(this, scalar);
     }
 
+    /**
+     * Multiply a matrix with another matrix. The number of columns in the first
+     * matrix has to match the number of rows of the second matrix.
+     *
+     * @param matrixA
+     * @param matrixB
+     * @return multiplied matrix
+     */
     public static Matrix multiply(Matrix matrixA, Matrix matrixB) {
 
         if (matrixA.height() != matrixB.width()) {
@@ -94,10 +166,24 @@ public class Matrix {
         return multipliedMatrix;
     }
 
+    /**
+     * Multiply the matrix with another matrix. The number of columns in the first
+     * matrix has to match the number of rows of the second matrix.
+     *
+     * @param matrix
+     * @return multiplied matrix
+     */
     public Matrix multiply(Matrix matrix) {
         return multiply(this, matrix);
     }
 
+    /**
+     * Add a matrix to another matrix. Matrices have to be the same shape.
+     *
+     * @param matrixA
+     * @param matrixB
+     * @return subtracted matrix
+     */
     public static Matrix add(Matrix matrixA, Matrix matrixB) {
 
         if (matrixA.height() != matrixB.height() || matrixA.width() != matrixB.width()) {
@@ -115,18 +201,45 @@ public class Matrix {
         return sumMatrix;
     }
 
+    /**
+     * Add a matrix to the matrix. Matrices have to be the same shape.
+     *
+     * @param matrix
+     * @return subtracted matrix
+     */
     public Matrix add(Matrix matrix) {
         return add(this, matrix);
     }
 
+    /**
+     * Subtract a matrix from another matrix. Matrices have to be the same shape.
+     *
+     * @param matrixA
+     * @param matrixB
+     * @return subtracted matrix
+     */
     public static Matrix subtract(Matrix matrixA, Matrix matrixB) {
         return add(matrixA, multiply(matrixB, -1));
     }
 
+    /**
+     * Subtract a matrix from the matrix. Matrices have to be the same shape.
+     *
+     * @param matrix
+     * @return subtracted matrix
+     */
     public Matrix subtract(Matrix matrix) {
         return subtract(this, matrix);
     }
 
+    /**
+     * Creates a square identity matrix of a certain size. An identity matrix is a
+     * square matrix that has 1s on the main diagonal from the upper left to
+     * the lower right and 0s everywehere else.
+     *
+     * @param size width and height of the matrix
+     * @return identity matrix
+     */
     public static Matrix identity(int size) {
 
         Matrix identityMatrix = new Matrix(size, size);
@@ -140,6 +253,15 @@ public class Matrix {
         return identityMatrix;
     }
 
+    /**
+     * Creates the submatrix of a matrix. It is obtained by removing one of the rows
+     * and columns.
+     *
+     * @param matrix
+     * @param i      row to remove
+     * @param j      column to remove
+     * @return submatrix
+     */
     public static Matrix submatrix(Matrix matrix, int i, int j) {
 
         if (i > matrix.height()) {
@@ -174,14 +296,37 @@ public class Matrix {
         return subMatrix;
     }
 
+    /**
+     * Creates the submatrix of the matrix. It is obtained by removing one of the
+     * rows and columns.
+     *
+     * @param i row to remove
+     * @param j column to remove
+     * @return submatrix
+     */
     public Matrix submatrix(int i, int j) {
         return submatrix(this, i, j);
     }
 
-    private static int sign(int n) {
-        return n % 2 == 0 ? 1 : -1;
+    /**
+     * The sign of a number is 1 if it is even and -1 if it is odd.
+     *
+     * @param number
+     * @return sign
+     */
+    private static int sign(int number) {
+        return (number % 2 == 0) ? 1 : -1;
     }
 
+    /**
+     * Calcualtes the determinant of a matrix. The determinant of a matrix is a
+     * special number that gives us important information about the matrix, such as
+     * if it can be used in matrix division, wether it is invertible, and what the
+     * results of transformations are on area, volume, and orientation.
+     *
+     * @param matrix
+     * @return
+     */
     public static double determinant(Matrix matrix) {
 
         if (matrix.height() != matrix.width()) {
@@ -205,141 +350,270 @@ public class Matrix {
         return determinantSum;
     }
 
+    /**
+     * Calcualtes the determinant of a matrix. The determinant of a matrix is a
+     * special number that gives us important information about the matrix, such as
+     * if it can be used in matrix division, wether it is invertible, and what the
+     * results of transformations are on area, volume, and orientation.
+     *
+     * @return
+     */
     public double determinant() {
         return determinant(this);
     }
 
+    /**
+     * Divides the matrix by a scalar.
+     *
+     * @param matrix
+     * @param scalar
+     * @return divided matrix
+     */
     public static Matrix divide(Matrix matrix, double scalar) {
         return multiply(matrix, 1 / scalar);
     }
 
+    /**
+     * Divides the matrix by a scalar.
+     *
+     * @param scalar
+     * @return divided matrix
+     */
     public Matrix divide(double scalar) {
         return divide(this, scalar);
     }
 
+    /**
+     * Divides a matrix by another matrix. Matrices can't be divided if either has a
+     * determinant of zero.
+     *
+     * @param matrixA
+     * @param matrixB
+     * @return divided matrix
+     */
     public static Matrix divide(Matrix matrixA, Matrix matrixB) {
 
         if (matrixA.determinant() == 0 || matrixB.determinant() == 0) {
-            throw new IllegalArgumentException("Division not possible (a determinant is zero)");
+            throw new IllegalArgumentException(
+                    "One or both matrices have a determinant of zero. Division not possible.");
         }
 
         return multiply(matrixA, matrixB.inverse());
     }
 
+    /**
+     * Divides the matrix by another matrix. Matrices can't be divided if either has
+     * a determinant of zero.
+     *
+     * @param matrix
+     * @return divided matrix
+     */
     public Matrix divide(Matrix matrix) {
         return divide(this, matrix);
     }
 
+    /**
+     * Calcualtes the minor of a matrix. It is the determinant of a submatrix
+     * obtained by removing one of the rows and columns.
+     *
+     * @param matrix
+     * @param i      row to remove
+     * @param j      column to remove
+     * @return minor
+     */
     public static double minor(Matrix matrix, int i, int j) {
         return matrix.submatrix(i, j).determinant();
     }
 
+    /**
+     * Calcualtes the minor of the matrix. It is the determinant of a submatrix
+     * obtained by removing one of the rows and columns.
+     *
+     * @param i row to remove
+     * @param j column to remove
+     * @return minor
+     */
     public double minor(int i, int j) {
         return minor(this, i, j);
     }
 
+    /**
+     * Calculates the cofactor of a submatrix. The cofactor is positive if row +
+     * column is even, and negative if it is odd.
+     *
+     * @param matrix
+     * @param i      row to remove
+     * @param j      column to remove
+     * @return
+     */
     public static double cofactor(Matrix matrix, int i, int j) {
         return sign(i + j) * matrix.minor(i, j);
     }
 
+    /**
+     * Calculates the cofactor of a submatrix. The cofactor is positive if row +
+     * column is even, and negative if it is odd.
+     *
+     * @param i row to remove
+     * @param j column to remove
+     * @return
+     */
     public double cofactor(int i, int j) {
         return cofactor(this, i, j);
     }
 
+    /**
+     * For each cell calculates the cofactor of the submatrix obtained by removing
+     * the row and columnt that cell is in.
+     *
+     * @param matrix
+     * @return cofactor matrix
+     */
     public static Matrix cofactor(Matrix matrix) {
         Matrix cofactorMatrix = new Matrix(matrix.height(), matrix.width());
 
-        for (int i = 1; i <= matrix.height(); i++) {
-            for (int j = 1; j <= matrix.width(); j++) {
-                cofactorMatrix.array[i - 1][j - 1] = cofactor(matrix, i, j);
+        for (int i = 0; i < matrix.height(); i++) {
+            for (int j = 0; j < matrix.width(); j++) {
+                cofactorMatrix.array[i][j] = cofactor(matrix, i + 1, j + 1);
             }
         }
 
         return cofactorMatrix;
     }
 
+    /**
+     * For each cell calculates the cofactor of the submatrix obtained by removing
+     * the row and columnt that cell is in.
+     *
+     * @return cofactor matrix
+     */
     public Matrix cofactor() {
         return cofactor(this);
     }
 
-    public static Matrix adjoint(Matrix matrix) {
+    /**
+     * Calculates the adjugate of a square matrix. It is the transpose of its
+     * cofactor matrix.
+     *
+     * @param matrix
+     * @return adjugate matrix
+     */
+    public static Matrix adjugate(Matrix matrix) {
 
         if (matrix.height() != matrix.width()) {
-            throw new IllegalArgumentException("Non-square matrices do not have an adjoint");
+            throw new IllegalArgumentException("Non-square matrices do not have an adjoint.");
         }
 
         return matrix.cofactor().transpose();
     }
 
-    public Matrix adjoint() {
-        return adjoint(this);
+    /**
+     * Calculates the adjugate of a square matrix. It is the transpose of its
+     * cofactor matrix.
+     *
+     * @return adjugate matrix
+     */
+    public Matrix adjugate() {
+        return adjugate(this);
     }
 
+    /**
+     * Calcualtes the inverse matrix of an invertible matrix. Multiplying a matrix
+     * by its inverse results in an identity matrix. It is the adjugate divided by
+     * its determinant.
+     *
+     * @param matrix
+     * @return inverse matrix
+     */
     public static Matrix inverse(Matrix matrix) {
 
         if (matrix.height() != matrix.width()) {
-            throw new IllegalArgumentException("Non-square matrices do not have an inverse");
+            throw new IllegalArgumentException("Non-square matrices are not invertible.");
         }
 
         double determinant = matrix.determinant();
 
         if (determinant == 0) {
-            throw new IllegalArgumentException("Inverse does not exist (determinant is zero)");
+            throw new IllegalArgumentException("Determinant is zero. Inverse does not exist.");
         }
 
-        return divide(matrix.adjoint(), determinant);
+        return divide(matrix.adjugate(), determinant);
     }
 
     public Matrix inverse() {
         return inverse(this);
     }
 
+    /**
+     * Raise a square matrix to a power.
+     *
+     * @param matrix to raise to power
+     * @param power  to raise matrix to
+     * @return matrix raised to power
+     */
     public static Matrix power(Matrix matrix, int power) {
-
-        if (power <= 0 && matrix.height() != matrix.width()) {
-            throw new IllegalArgumentException("Non-square matrices can only be raised to a power greater than zero");
+        // only square matrices can be raised to a power
+        if (matrix.height() != matrix.width()) {
+            throw new IllegalArgumentException("Non-square matrices can not be raised to a power.");
         }
-
+        // power 0 results in an identity matrix
         if (power == 0) {
             return identity(matrix.height());
         }
-
         Matrix powerMatrix;
-
+        // invert matrix if using negative powers
         if (power < 0) {
             powerMatrix = matrix.inverse();
         } else {
             powerMatrix = matrix;
         }
-
-        /*
-         * for (int a = 1; a < Math.abs(power); a++) {
-         * powerMatrix = powerMatrix.multiply(matrix);
-         * }
-         */
-
-        int y = Math.abs(power);
-        Matrix z = Matrix.identity(matrix.height());
-        while (y > 0) {
-            if (y % 2 == 1) {
-                z.multiply(powerMatrix);
+        // with small powers it is faster to use naïve multiplying, and with larger
+        // powers it is faster to use the square-and-multiply algorithm. 8 seems to be a
+        // good cutoof power.
+        final int cutoff = 8;
+        if (Math.abs(power) < cutoff) {
+            for (int a = 1; a < Math.abs(power); a++) {
+                powerMatrix = powerMatrix.multiply(matrix);
             }
-            powerMatrix.multiply(powerMatrix);
-            y = y >> 1;
+            return powerMatrix;
+        } else {
+            int powerCounter = Math.abs(power);
+            Matrix identityMatrix = Matrix.identity(Math.max(matrix.width(), matrix.height()));
+            while (powerCounter > 0) {
+                // if counter is odd multiply identity matrix with initial matrix
+                if (powerCounter % 2 == 1) {
+                    identityMatrix = identityMatrix.multiply(powerMatrix);
+                }
+                // square initial matrix
+                powerMatrix = powerMatrix.power(2);
+                // divide counter by 2
+                powerCounter = powerCounter >> 1;
+            }
+            return identityMatrix;
         }
-        return z;
-
-        // return powerMatrix;
     }
 
+    /**
+     * Raise square matrix to power.
+     *
+     * @param power to raise matrix to
+     * @return matrix raised to power
+     */
     public Matrix power(int power) {
         return power(this, power);
     }
 
+    /**
+     * Calculates the sum of elements on the main diagonal from the upper left to
+     * the lower right of a square matrix.
+     *
+     * @param matrix to take the trace of
+     * @return sum of elements on the main diagonal
+     */
     public static double trace(Matrix matrix) {
 
         if (matrix.height() != matrix.width()) {
-            throw new IllegalArgumentException("Non-square matrices can not have a trace");
+            throw new IllegalArgumentException("Non-square matrices do not have a trace.");
         }
 
         double traceSum = 0;
@@ -351,6 +625,12 @@ public class Matrix {
         return traceSum;
     }
 
+    /**
+     * Calculates the sum of elements on the main diagonal from the upper left to
+     * the lower right of a square matrix.
+     *
+     * @return sum of elements on the main diagonal
+     */
     public double trace() {
         return trace(this);
     }
