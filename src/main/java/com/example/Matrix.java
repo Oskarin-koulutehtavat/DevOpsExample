@@ -159,11 +159,11 @@ public class Matrix {
     Matrix subMatrix = new Matrix(matrix.height()-1, matrix.width()-1);
     
     for (int m = 0; m < matrix.height(); m++) {
-      if (m == i-1) continue;
+      if (m == i - 1) continue;
       for (int n = 0; n < matrix.width(); n++) {
-        if (n == j-1) continue;
-        int mM = m<i?m:m-1;
-        int nM = n<j?n:n-1;
+        if (n == j - 1) continue;
+        int mM = m < i ? m : m - 1;
+        int nM = n < j ? n : n - 1;
         subMatrix.array[mM][nM] = matrix.array[m][n];
       }
     }
@@ -175,7 +175,7 @@ public class Matrix {
   }
 
   private static int sign(int n) {
-    return n%2==0?1:-1;
+    return n % 2 == 0 ? 1 : -1;
   }
 
   public static double determinant(Matrix matrix) {
@@ -195,7 +195,7 @@ public class Matrix {
     double determinantSum = 0;
 
     for (int n = 0; n < matrix.width(); n++) {
-      determinantSum += sign(n) * matrix.array[0][n] * matrix.submatrix(1, n+1).determinant();
+      determinantSum += sign(n) * matrix.array[0][n] * matrix.submatrix(1, n + 1).determinant();
     }
 
     return determinantSum;
@@ -223,7 +223,7 @@ public class Matrix {
 
     for (int i = 1; i <= matrix.height(); i++) {
       for (int j = 1; j <= matrix.width(); j++) {
-        cofactorMatrix.array[i-1][j-1] = cofactor(matrix, i, j);
+        cofactorMatrix.array[i - 1][j - 1] = cofactor(matrix, i, j);
       }
     }
 
