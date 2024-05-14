@@ -67,6 +67,17 @@ public class Matrix {
         return array;
     }
 
+    /*
+     * TODO Row operations
+     *
+     * row addition, that is adding a row to another
+     *
+     * row multiplication, that is multiplying all entries
+     * of a row by a non-zero constant
+     *
+     * row switching, that is interchanging two rows of a matrix
+     */
+
     /**
      * Flips a matrix along the main diagonal.
      *
@@ -250,19 +261,19 @@ public class Matrix {
      * and columns.
      *
      * @param matrix
-     * @param i      row to remove
-     * @param j      column to remove
+     * @param row    to remove
+     * @param column to remove
      * @return submatrix
      */
-    public static Matrix submatrix(Matrix matrix, int i, int j) {
+    public static Matrix submatrix(Matrix matrix, int row, int column) {
 
-        if (i > matrix.height()) {
+        if (row > matrix.height()) {
             throw new IndexOutOfBoundsException(
-                    String.format("%d out of bounds for size %d", i, matrix.height()));
+                    String.format("%d out of bounds for size %d", row, matrix.height()));
         }
-        if (j > matrix.width()) {
+        if (column > matrix.width()) {
             throw new IndexOutOfBoundsException(
-                    String.format("%d out of bounds for size %d", j, matrix.width()));
+                    String.format("%d out of bounds for size %d", column, matrix.width()));
         }
 
         if (matrix.width() < 2 && matrix.height() < 2) {
@@ -272,15 +283,15 @@ public class Matrix {
         Matrix subMatrix = new Matrix(matrix.height() - 1, matrix.width() - 1);
 
         for (int m = 0; m < matrix.height(); m++) {
-            if (m == i - 1) {
+            if (m == row - 1) {
                 continue;
             }
             for (int n = 0; n < matrix.width(); n++) {
-                if (n == j - 1) {
+                if (n == column - 1) {
                     continue;
                 }
-                int mM = m < i ? m : m - 1;
-                int nM = n < j ? n : n - 1;
+                int mM = m < row ? m : m - 1;
+                int nM = n < column ? n : n - 1;
                 subMatrix.array[mM][nM] = matrix.array[m][n];
             }
         }
@@ -292,12 +303,12 @@ public class Matrix {
      * Creates the submatrix of the matrix. It is obtained by removing one of the
      * rows and columns.
      *
-     * @param i row to remove
-     * @param j column to remove
+     * @param row    to remove
+     * @param column to remove
      * @return submatrix
      */
-    public Matrix submatrix(int i, int j) {
-        return submatrix(this, i, j);
+    public Matrix submatrix(int row, int column) {
+        return submatrix(this, row, column);
     }
 
     /**
