@@ -137,6 +137,23 @@ public class Matrix {
     }
 
     /**
+     * Sum the products of elements in two arrays.
+     *
+     * @param arrayA
+     * @param arrayB
+     * @return sum of products
+     */
+    private static double dot(double[] arrayA, double[] arrayB) {
+        double productsum = 0;
+
+        for (int i = 0; i < arrayA.length; i++) {
+            productsum += arrayA[i] * arrayB[i];
+        }
+
+        return productsum;
+    }
+
+    /**
      * Multiply a matrix with another matrix. The number of columns in the first
      * matrix has to match the number of rows of the second matrix.
      *
@@ -156,13 +173,8 @@ public class Matrix {
 
         for (int a = 0; a < matrixA.height(); a++) {
             for (int b = 0; b < matrixBT.height(); b++) {
-                double productsum = 0;
 
-                for (int i = 0; i < matrixA.array[a].length; i++) {
-                    productsum += matrixA.array[a][i] * matrixBT.array[b][i];
-                }
-
-                multipliedMatrix.array[a][b] = productsum;
+                multipliedMatrix.array[a][b] = dot(matrixA.array[a], matrixBT.array[b]);
             }
         }
 
@@ -240,7 +252,8 @@ public class Matrix {
      * square matrix that has 1s on the main diagonal from the upper left to
      * the lower right and 0s everywehere else.
      *
-     * @param size width and height of the matrix
+     * @param size
+     *            width and height of the matrix
      * @return identity matrix
      */
     public static Matrix identity(int size) {
@@ -261,8 +274,10 @@ public class Matrix {
      * and columns.
      *
      * @param matrix
-     * @param row    to remove
-     * @param column to remove
+     * @param row
+     *            to remove
+     * @param column
+     *            to remove
      * @return submatrix
      */
     public static Matrix submatrix(Matrix matrix, int row, int column) {
@@ -303,8 +318,10 @@ public class Matrix {
      * Creates the submatrix of the matrix. It is obtained by removing one of the
      * rows and columns.
      *
-     * @param row    to remove
-     * @param column to remove
+     * @param row
+     *            to remove
+     * @param column
+     *            to remove
      * @return submatrix
      */
     public Matrix submatrix(int row, int column) {
@@ -420,8 +437,10 @@ public class Matrix {
      * obtained by removing one of the rows and columns.
      *
      * @param matrix
-     * @param i      row to remove
-     * @param j      column to remove
+     * @param i
+     *            row to remove
+     * @param j
+     *            column to remove
      * @return minor
      */
     public static double minor(Matrix matrix, int i, int j) {
@@ -432,8 +451,10 @@ public class Matrix {
      * Calcualtes the minor of the matrix. It is the determinant of a submatrix
      * obtained by removing one of the rows and columns.
      *
-     * @param i row to remove
-     * @param j column to remove
+     * @param i
+     *            row to remove
+     * @param j
+     *            column to remove
      * @return minor
      */
     public double minor(int i, int j) {
@@ -445,8 +466,10 @@ public class Matrix {
      * column is even, and negative if it is odd.
      *
      * @param matrix
-     * @param i      row to remove
-     * @param j      column to remove
+     * @param i
+     *            row to remove
+     * @param j
+     *            column to remove
      * @return
      */
     public static double cofactor(Matrix matrix, int i, int j) {
@@ -457,8 +480,10 @@ public class Matrix {
      * Calculates the cofactor of a submatrix. The cofactor is positive if row +
      * column is even, and negative if it is odd.
      *
-     * @param i row to remove
-     * @param j column to remove
+     * @param i
+     *            row to remove
+     * @param j
+     *            column to remove
      * @return
      */
     public double cofactor(int i, int j) {
@@ -550,8 +575,10 @@ public class Matrix {
     /**
      * Raise a square matrix to a power.
      *
-     * @param matrix to raise to power
-     * @param power  to raise matrix to
+     * @param matrix
+     *            to raise to power
+     * @param power
+     *            to raise matrix to
      * @return matrix raised to power
      */
     public static Matrix power(Matrix matrix, int power) {
@@ -567,7 +594,7 @@ public class Matrix {
         // invert matrix if using negative powers
         if (power < 0) {
             powerMatrix = matrix.inverse();
-        } else {
+        }else {
             powerMatrix = matrix;
         }
         // with small powers it is faster to use naïve multiplying, and with larger
@@ -579,7 +606,7 @@ public class Matrix {
                 powerMatrix = powerMatrix.multiply(matrix);
             }
             return powerMatrix;
-        } else {
+        }else {
             int powerCounter = Math.abs(power);
             Matrix identityMatrix = Matrix.identity(Math.max(matrix.width(), matrix.height()));
             while (powerCounter > 0) {
@@ -599,7 +626,8 @@ public class Matrix {
     /**
      * Raise square matrix to power.
      *
-     * @param power to raise matrix to
+     * @param power
+     *            to raise matrix to
      * @return matrix raised to power
      */
     public Matrix power(int power) {
@@ -610,7 +638,8 @@ public class Matrix {
      * Calculates the sum of elements on the main diagonal from the upper left to
      * the lower right of a square matrix.
      *
-     * @param matrix to take the trace of
+     * @param matrix
+     *            to take the trace of
      * @return sum of elements on the main diagonal
      */
     public static double trace(Matrix matrix) {
