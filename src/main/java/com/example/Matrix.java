@@ -96,29 +96,6 @@ public class Matrix {
     }
 
     /**
-     * Multiply and add elements of two vectors together. Vectors have to have the
-     * same number of elements.
-     *
-     * @param vectorA
-     * @param vectorB
-     * @return scalar product
-     */
-    private static double dot(double[] vectorA, double[] vectorB) {
-
-        if (vectorA.length != vectorB.length) {
-            throw new IllegalArgumentException("Vectors are not the same dimension");
-        }
-
-        double productsum = 0;
-
-        for (int i = 0; i < vectorA.length; i++) {
-            productsum += vectorA[i] * vectorB[i];
-        }
-
-        return productsum;
-    }
-
-    /**
      * Multiplies a matrix by a scalar.
      *
      * @param matrix
@@ -164,11 +141,17 @@ public class Matrix {
 
         Matrix multipliedMatrix = new Matrix(matrixA.height(), matrixB.width());
 
-        Matrix bt = matrixB.transpose();
+        Matrix matrixBT = matrixB.transpose();
 
         for (int a = 0; a < matrixA.height(); a++) {
-            for (int b = 0; b < bt.height(); b++) {
-                multipliedMatrix.array[a][b] = dot(matrixA.array[a], bt.array[b]);
+            for (int b = 0; b < matrixBT.height(); b++) {
+                double productsum = 0;
+
+                for (int i = 0; i < matrixA.array[a].length; i++) {
+                    productsum += matrixA.array[a][i] * matrixBT.array[b][i];
+                }
+
+                multipliedMatrix.array[a][b] = productsum;
             }
         }
 
