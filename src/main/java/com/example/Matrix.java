@@ -701,10 +701,42 @@ public class Matrix {
         if (object == this) {
             return true;
         }
+
         if (object == null || this.getClass() != object.getClass()) {
             return false;
         }
+
         Matrix matrixObject = (Matrix) object;
-        return Arrays.deepEquals(array, matrixObject.array);
+
+        if (this.array == matrixObject.array) {
+            return true;
+        }
+
+        if (this.array == null || matrixObject.array == null) {
+            return false;
+        }
+
+        int length = this.array.length;
+
+        if (matrixObject.array.length != length) {
+            return false;
+        }
+
+        for (int i = 0; i < length; i++) {
+            double[] e1 = this.array[i];
+            double[] e2 = matrixObject.array[i];
+
+            if (e1 == null || e2 == null) {
+                return false;
+            }
+
+            for (int j = 0; j < e1.length; j++) {
+                if (e1[j] != e2[j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+
     }
 }
