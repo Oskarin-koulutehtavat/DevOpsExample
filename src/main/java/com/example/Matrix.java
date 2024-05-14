@@ -13,7 +13,7 @@ public class Matrix {
     private double[][] array;
 
     /**
-     * Creates an empty matrix.
+     * Creates an empty matrix filled with 0s.
      *
      * @param height
      * @param width
@@ -56,6 +56,15 @@ public class Matrix {
      */
     public int width() {
         return this.array[0].length;
+    }
+
+    /**
+     * Matrix contents in a 2D array.
+     *
+     * @return array
+     */
+    public double[][] array() {
+        return array;
     }
 
     /**
