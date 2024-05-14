@@ -107,6 +107,23 @@ public class Matrix {
     }
 
     /**
+     * Sum the products of elements in two arrays.
+     *
+     * @param arrayA
+     * @param arrayB
+     * @return sum of products
+     */
+    private static double dot(double[] arrayA, double[] arrayB) {
+        double productsum = 0;
+
+        for (int i = 0; i < arrayA.length; i++) {
+            productsum += arrayA[i] * arrayB[i];
+        }
+
+        return productsum;
+    }
+
+    /**
      * Multiplies a matrix by a scalar.
      *
      * @param matrix
@@ -134,23 +151,6 @@ public class Matrix {
      */
     public Matrix multiply(double scalar) {
         return multiply(this, scalar);
-    }
-
-    /**
-     * Sum the products of elements in two arrays.
-     *
-     * @param arrayA
-     * @param arrayB
-     * @return sum of products
-     */
-    private static double dot(double[] arrayA, double[] arrayB) {
-        double productsum = 0;
-
-        for (int i = 0; i < arrayA.length; i++) {
-            productsum += arrayA[i] * arrayB[i];
-        }
-
-        return productsum;
     }
 
     /**
@@ -594,7 +594,7 @@ public class Matrix {
         // invert matrix if using negative powers
         if (power < 0) {
             powerMatrix = matrix.inverse();
-        }else {
+        } else {
             powerMatrix = matrix;
         }
         // with small powers it is faster to use naïve multiplying, and with larger
@@ -606,7 +606,7 @@ public class Matrix {
                 powerMatrix = powerMatrix.multiply(matrix);
             }
             return powerMatrix;
-        }else {
+        } else {
             int powerCounter = Math.abs(power);
             Matrix identityMatrix = Matrix.identity(Math.max(matrix.width(), matrix.height()));
             while (powerCounter > 0) {
