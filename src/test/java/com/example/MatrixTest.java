@@ -3,12 +3,8 @@ package com.example;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
 
 /**
  * Unit tests for Matrix class.
@@ -447,9 +443,9 @@ class MatrixTest {
                 {1, 2}});
         final Matrix matrixB = new Matrix(new double[][]{
                 {14, 13},
-                {13, 14}}).inverse();
+                {13, 14}});
         final int power = -3;
-        assertEquals(matrixB, matrixA.power(power));
+        assertEquals(matrixB.inverse(), matrixA.power(power));
     }
 
     /**
@@ -462,9 +458,9 @@ class MatrixTest {
                 {7, 8}});
         final Matrix matrixB = new Matrix(new double[][]{
                 {11654847, 14357898},
-                {50252643, 61907490}}).inverse();
+                {50252643, 61907490}});
         final int power = -8;
-        assertEquals(matrixB, matrixA.power(power));
+        assertEquals(matrixB.inverse(), matrixA.power(power));
     }
 
     /**
@@ -528,10 +524,7 @@ class MatrixTest {
                 {1, 2, 3},
                 {4, 5, 6},
                 {7, 8, 9}});
-        final String matrixString = "" +
-                "[1.0,2.0,3.0]\n" +
-                "[4.0,5.0,6.0]\n" +
-                "[7.0,8.0,9.0]";
+        final String matrixString = "[1.0,2.0,3.0]\n[4.0,5.0,6.0]\n[7.0,8.0,9.0]";
         assertEquals(matrixString, matrixA.toString());
     }
 
