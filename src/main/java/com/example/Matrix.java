@@ -462,7 +462,8 @@ public class Matrix {
     }
 
     /**
-     * Calculates the cofactor of a submatrix. The cofactor is positive if row +
+     * Calculates the cofactor of a submatrix. Cofactors are The cofactor is
+     * positive if row +
      * column is even, and negative if it is odd.
      *
      * @param matrix
@@ -502,7 +503,7 @@ public class Matrix {
 
         for (int i = 0; i < matrix.height(); i++) {
             for (int j = 0; j < matrix.width(); j++) {
-                cofactorMatrix.array[i][j] = cofactor(matrix, i + 1, j + 1);
+                cofactorMatrix.array[i][j] = matrix.cofactor(i + 1, j + 1);
             }
         }
 
@@ -529,7 +530,7 @@ public class Matrix {
     public static Matrix adjugate(Matrix matrix) {
 
         if (matrix.height() != matrix.width()) {
-            throw new IllegalArgumentException("Non-square matrices do not have an adjoint.");
+            throw new IllegalArgumentException("Non-square matrices do not have an adjugate.");
         }
 
         return matrix.cofactor().transpose();
@@ -592,7 +593,7 @@ public class Matrix {
         }
         // raising to a negative power is the same as raising the inverse to a positive
         // power
-        Matrix powerMatrix = (power > 0) ? matrix : matrix.inverse();
+        Matrix powerMatrix = matrix;
         // with small powers it is faster to use naïve multiplying, and with larger
         // powers it is faster to use the square-and-multiply algorithm. 8 seems to be a
         // good cutoof power.
@@ -601,7 +602,6 @@ public class Matrix {
             for (int a = 1; a < Math.abs(power); a++) {
                 powerMatrix = powerMatrix.multiply(matrix);
             }
-            return powerMatrix;
         } else {
             int powerCounter = Math.abs(power);
             Matrix identityMatrix = Matrix.identity(matrix.height());
@@ -615,8 +615,9 @@ public class Matrix {
                 // divide counter by 2
                 powerCounter = powerCounter >> 1;
             }
-            return identityMatrix;
+            powerMatrix = identityMatrix;
         }
+        return (power > 0) ? powerMatrix : powerMatrix.inverse();
     }
 
     /**
@@ -689,7 +690,9 @@ public class Matrix {
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(array);
+        // Hashcode of the string representation of the matrix, where -0.0 is replaced
+        // with 0.0, as they should be treated as equal.
+        return this.toString().replaceAll("-(0\\.0[\\,\\]])", "$1").hashCode();
     }
 
     @Override
