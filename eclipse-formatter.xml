@@ -222,7 +222,7 @@
 			value="do not insert" />
 		<setting
 			id="org.eclipse.jdt.core.formatter.insert_space_after_closing_angle_bracket_in_type_parameters"
-			value="do not insert" />
+			value="insert" />
 		<setting id="org.eclipse.jdt.core.formatter.insert_space_after_closing_brace_in_block"
 			value="insert" />
 		<setting id="org.eclipse.jdt.core.formatter.insert_space_after_closing_paren_in_cast"
@@ -297,7 +297,7 @@
 			value="do not insert" />
 		<setting
 			id="org.eclipse.jdt.core.formatter.insert_space_after_opening_brace_in_array_initializer"
-			value="do not insert" />
+			value="insert" />
 		<setting
 			id="org.eclipse.jdt.core.formatter.insert_space_after_opening_bracket_in_array_allocation_expression"
 			value="do not insert" />
@@ -372,7 +372,7 @@
 			value="do not insert" />
 		<setting
 			id="org.eclipse.jdt.core.formatter.insert_space_before_closing_brace_in_array_initializer"
-			value="do not insert" />
+			value="insert" />
 		<setting
 			id="org.eclipse.jdt.core.formatter.insert_space_before_closing_bracket_in_array_allocation_expression"
 			value="do not insert" />
@@ -493,7 +493,7 @@
 			value="insert" />
 		<setting
 			id="org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_array_initializer"
-			value="do not insert" />
+			value="insert" />
 		<setting id="org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_block"
 			value="insert" />
 		<setting
