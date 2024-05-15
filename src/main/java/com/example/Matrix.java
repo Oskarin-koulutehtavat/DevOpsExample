@@ -590,13 +590,9 @@ public class Matrix {
         if (power == 0) {
             return identity(matrix.height());
         }
-        Matrix powerMatrix;
-        // invert matrix if using negative powers
-        if (power < 0) {
-            powerMatrix = matrix.inverse();
-        } else {
-            powerMatrix = matrix;
-        }
+        // raising to a negative power is the same as raising the inverse to a positive
+        // power
+        Matrix powerMatrix = (power > 0) ? matrix : matrix.inverse();
         // with small powers it is faster to use naïve multiplying, and with larger
         // powers it is faster to use the square-and-multiply algorithm. 8 seems to be a
         // good cutoof power.
@@ -608,7 +604,7 @@ public class Matrix {
             return powerMatrix;
         } else {
             int powerCounter = Math.abs(power);
-            Matrix identityMatrix = Matrix.identity(Math.max(matrix.width(), matrix.height()));
+            Matrix identityMatrix = Matrix.identity(matrix.height());
             while (powerCounter > 0) {
                 // if counter is odd multiply identity matrix with initial matrix
                 if (powerCounter % 2 == 1) {
