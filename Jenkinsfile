@@ -8,7 +8,7 @@ pipeline {
                 git 'https://github.com/Oskarin-koulutehtavat/matrix.git'
 
                 // Run Maven on a Unix agent.
-                sh "mvn -D"maven.test.failure.ignore"=true -D"checkstyle.failOnViolation"=false clean compile test package"
+                sh 'mvn -D"maven.test.failure.ignore"=true -D"checkstyle.failOnViolation"=false clean compile test package'
 
                 // To run Maven on a Windows agent, use bat instead of sh
             }
