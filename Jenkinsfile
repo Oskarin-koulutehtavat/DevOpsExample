@@ -9,7 +9,7 @@ pipeline {
 
                 // Run Maven on a Unix agent.
                 withMaven(maven: 'Maven 3.9.6') {
-                    sh 'mvn -D"skip.tests clean package'
+                    sh 'mvn -Dskip.tests clean package'
                 }
                 // To run Maven on a Windows agent, use bat instead of sh
             }
