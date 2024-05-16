@@ -7,6 +7,7 @@ pipeline {
                 // Get some code from a GitHub repository
                 git 'https://github.com/Oskarin-koulutehtavat/matrix.git'
 
+                sh 'echo $M2_HOME'
                 // Run Maven on a Unix agent.
                 sh '$M2_HOME/bin/mvn -D"maven.test.failure.ignore"=true -D"checkstyle.failOnViolation"=false clean compile test package'
 
