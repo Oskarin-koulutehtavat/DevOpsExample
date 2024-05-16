@@ -2,29 +2,47 @@ pipeline {
     agent any
 
     stages {
-        stage('Maven Build') {
-            steps {
-                // Get some code from a GitHub repository
-                git 'https://github.com/Oskarin-koulutehtavat/matrix.git'
+        withMaven(globalMavenSettingsConfig: '', jdk: '', maven: '', mavenSettingsConfig: '', traceability: true) {
+            stage('Maven Build') {
+                steps {
+                    // Get some code from a GitHub repository
+                    git 'https://github.com/Oskarin-koulutehtavat/matrix.git'
 
-                // Run Maven on a Unix agent.
-                sh '$M2_HOME/bin/mvn -D"maven.test.failure.ignore"=true -D"checkstyle.failOnViolation"=false clean compile test package'
+                    // Run Maven on a Unix agent.
+                    sh 'mvn -D"skip.tests clean package'
 
-                // To run Maven on a Windows agent, use bat instead of sh
+                    // To run Maven on a Windows agent, use bat instead of sh
+                }
+
+                post {
+                    // If Maven was able to compile archive the jar file.
+                    success {
+                        archiveArtifacts 'target/*.jar'
+                    }
+                }
             }
+            stage('Maven Test') {
+                steps {
+                    // Get some code from a GitHub repository
+                    git 'https://github.com/Oskarin-koulutehtavat/matrix.git'
 
-            post {
-                // If Maven was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
-                success {
-                    junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.jar'
+                    // Run Maven tests.
+                    sh 'mvn test'
+                }
+
+                post {
+                    // If Maven was able to run the tests, even if some of the test
+                    // failed, record the test results.
+                    always {
+                        junit '/target/surefire-reports/*.xml'
+                    }
                 }
             }
         }
         stage('Docker Build') {
             steps {
-                // Build docker image tagged example/matrix:latest using the current directory (.) as a build context
+                // Build docker image tagged example/matrix:latest using
+                // the current directory (.) as a build context
                 sh 'docker build -t example/matrix:latest .'
             }
         }
