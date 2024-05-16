@@ -35,7 +35,7 @@ pipeline {
                 // If Maven was able to run the tests, even if some of the test
                 // failed, record the test results.
                 always {
-                    junit '/target/surefire-reports/*.xml'
+                    junit 'target/surefire-reports/*.xml'
                 }
             }
         }
