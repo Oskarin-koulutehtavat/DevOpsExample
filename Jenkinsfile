@@ -8,7 +8,7 @@ pipeline {
                 git 'https://github.com/Oskarin-koulutehtavat/matrix.git'
 
                 // Run Maven on a Unix agent.
-                withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'Maven 3.9.6', mavenSettingsConfig: '', traceability: true) {
+                withMaven(maven: 'Maven 3.9.6') {
                     sh 'mvn -D"skip.tests clean package'
                 }
                 // To run Maven on a Windows agent, use bat instead of sh
@@ -26,7 +26,7 @@ pipeline {
                 git 'https://github.com/Oskarin-koulutehtavat/matrix.git'
 
                 // Run Maven tests.
-                withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'Maven 3.9.6', mavenSettingsConfig: '', traceability: true) {
+                withMaven(maven: 'Maven 3.9.6') {
                     sh 'mvn test'
                 }
             }
