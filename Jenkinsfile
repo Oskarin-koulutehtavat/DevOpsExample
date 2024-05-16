@@ -43,7 +43,7 @@ pipeline {
             steps {
                 // Build docker image tagged example/matrix:latest using
                 // the current directory (.) as a build context
-                sh 'docker buildx -t example/matrix:latest .'
+                sh 'docker buildx build -t example/matrix:latest .'
             }
         }
     }
