@@ -16,6 +16,7 @@ pipeline {
                         sh 'mvn -D"skip.tests clean package sonar:sonar'
                     }
                     // To run Maven on a Windows agent, use bat instead of sh
+                }
                 post {
                     // If Maven was able to compile archive the jar file.
                     success {
