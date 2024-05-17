@@ -8,7 +8,7 @@ pipeline {
                 git 'https://github.com/Oskarin-koulutehtavat/matrix.git'
             }
         }
-        withMaven(globalMavenSettingsConfig: '', jdk: '', maven: '', mavenSettingsConfig: '', traceability: true) {
+        withMaven(maven: 'Maven 3.9.6') {
             stage('Maven Build') {
                 steps {
                     // Run Maven on a Unix agent.
