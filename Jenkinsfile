@@ -11,7 +11,7 @@ pipeline {
         stage('Maven Build') {
             steps {
                 // Run Maven on a Unix agent.
-                withSonarQubeEnv(installationName: 'sonar') {
+                withSonarQubeEnv(installationName: 'sonar', credentialsId: 'SQT_WSL') {
                     withMaven(maven: 'Maven 3.9.6') {
                         sh 'mvn -Dskip.tests clean package sonar:sonar'
                     }
