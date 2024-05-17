@@ -5,7 +5,7 @@ pipeline {
         stage('SCM'){
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/Oskarin-koulutehtavat/matrix.git'
+                git 'https://github.com/Oskarin-koulutehtavat/DevOpsExample.git'
             }
         }
         stage('Maven Build') {
@@ -27,9 +27,6 @@ pipeline {
         }
         stage('Maven Test') {
             steps {
-                // Get some code from a GitHub repository
-                git 'https://github.com/Oskarin-koulutehtavat/matrix.git'
-
                 // Run Maven tests.
                 withMaven(maven: 'Maven 3.9.6') {
                     sh 'mvn test'
