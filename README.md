@@ -1,4 +1,4 @@
-# Yksinkertainen DevOps Pipeline eli Javakoodisi GitHubista Dockeriin Jenkinsillä
+# Yksinkertainen DevOps Pipeline eli Java-koodisi GitHubista Dockeriin Jenkinsillä
 
 Tässä esimerkissä kuvaillaan askeleet GitHubissa sijaitsevan Java projektin testien suorituksen ja koonnin Mavenillä, laadun tarkistuksen SonarQubella, ja Docker "kuvan" luomisen Jenkinsillä. Java, Jenkins ja Docker asennuksiin löytyy scriptit. Jos suoritat scriptit, voit jättää välistä ohjeiden asennus vaiheet.
 
