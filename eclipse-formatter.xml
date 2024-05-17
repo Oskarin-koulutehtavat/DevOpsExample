@@ -14,5 +14,6 @@
 			id="org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_array_initializer"
 			value="do not insert" />
 		<setting id="org.eclipse.jdt.core.formatter.lineSplit" value="80" />
+		<setting id="org.eclipse.jdt.core.formatter.join_wrapped_lines" value="false" />
 	</profile>
 </profiles>

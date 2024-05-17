@@ -76,7 +76,8 @@ class MatrixTest {
         final Matrix matrixB = new Matrix(new double[][]{
                 {0, 0},
                 {7, 5}});
-        assertThrows(IllegalArgumentException.class, () -> matrixA.add(matrixB));
+        assertThrows(IllegalArgumentException.class,
+                () -> matrixA.add(matrixB));
     }
 
     /**
@@ -122,7 +123,8 @@ class MatrixTest {
         final Matrix matrixB = new Matrix(new double[][]{
                 {0, 0},
                 {7, 5}});
-        assertThrows(IllegalArgumentException.class, () -> matrixA.subtract(matrixB));
+        assertThrows(IllegalArgumentException.class,
+                () -> matrixA.subtract(matrixB));
     }
 
     /**
@@ -170,7 +172,8 @@ class MatrixTest {
         final Matrix matrixB = new Matrix(new double[][]{
                 {0, 1000, 0},
                 {0, 10, 0}});
-        assertThrows(IllegalArgumentException.class, () -> matrixA.multiply(matrixB));
+        assertThrows(IllegalArgumentException.class,
+                () -> matrixA.multiply(matrixB));
     }
 
     /**
@@ -212,7 +215,8 @@ class MatrixTest {
                 {9, 10, 11, 12}});
         final int row = 4;
         final int column = 2;
-        assertThrows(IndexOutOfBoundsException.class, () -> matrixA.submatrix(row, column));
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> matrixA.submatrix(row, column));
     }
 
     /**
@@ -226,7 +230,8 @@ class MatrixTest {
                 {9, 10, 11, 12}});
         final int row = 3;
         final int column = 5;
-        assertThrows(IndexOutOfBoundsException.class, () -> matrixA.submatrix(row, column));
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> matrixA.submatrix(row, column));
     }
 
     /**
@@ -248,7 +253,8 @@ class MatrixTest {
     @Test
     void testDeterminant1x1() {
         final double determinant = 2;
-        final Matrix matrixA = new Matrix(new double[][]{{determinant}});
+        final Matrix matrixA = new Matrix(
+                new double[][]{{determinant}});
         assertEquals(determinant, matrixA.determinant());
     }
 
@@ -286,7 +292,8 @@ class MatrixTest {
         final Matrix matrixA = new Matrix(new double[][]{
                 {2, 3, 4},
                 {1, 0, 0}});
-        assertThrows(IllegalArgumentException.class, () -> matrixA.determinant());
+        assertThrows(IllegalArgumentException.class,
+                () -> matrixA.determinant());
     }
 
     /**
@@ -328,7 +335,8 @@ class MatrixTest {
         final Matrix matrixA = new Matrix(new double[][]{
                 {1, 2, 3},
                 {4, 5, 6}});
-        assertThrows(IllegalArgumentException.class, () -> matrixA.inverse());
+        assertThrows(IllegalArgumentException.class,
+                () -> matrixA.inverse());
     }
 
     /**
@@ -340,7 +348,8 @@ class MatrixTest {
                 {1, 2, 3},
                 {1, 2, 3},
                 {1, 2, 3}});
-        assertThrows(IllegalArgumentException.class, () -> matrixA.inverse());
+        assertThrows(IllegalArgumentException.class,
+                () -> matrixA.inverse());
     }
 
     /**
@@ -361,8 +370,8 @@ class MatrixTest {
     }
 
     /**
-     * Test dividing matrix by another matrix fails with a matrix with determinant
-     * of zero.
+     * Test dividing matrix by another matrix fails with a matrix with
+     * determinant of zero.
      */
     @Test
     void testDivideZeroDeterminant() {
@@ -374,7 +383,8 @@ class MatrixTest {
                 {1, 2, 3},
                 {1, 2, 3},
                 {1, 2, 3}});
-        assertThrows(IllegalArgumentException.class, () -> matrixA.divide(matrixB));
+        assertThrows(IllegalArgumentException.class,
+                () -> matrixA.divide(matrixB));
     }
 
     /**
@@ -398,7 +408,8 @@ class MatrixTest {
         final Matrix matrixA = new Matrix(new double[][]{
                 {1, 2, 3},
                 {4, 5, 6}});
-        assertThrows(IllegalArgumentException.class, () -> matrixA.trace());
+        assertThrows(IllegalArgumentException.class,
+                () -> matrixA.trace());
     }
 
     /**
@@ -464,7 +475,8 @@ class MatrixTest {
     }
 
     /**
-     * Test raising matrix to power 0. Results in identity matrix of the same size.
+     * Test raising matrix to power 0. Results in identity matrix of the same
+     * size.
      */
     @Test
     void testPowerZero() {
@@ -485,7 +497,8 @@ class MatrixTest {
         final Matrix matrixA = new Matrix(new double[][]{
                 {1, 2, 3},
                 {4, 5, 6}});
-        assertThrows(IllegalArgumentException.class, () -> matrixA.power(2));
+        assertThrows(IllegalArgumentException.class,
+                () -> matrixA.power(2));
     }
 
     /**
@@ -496,7 +509,8 @@ class MatrixTest {
         final Matrix matrixA = new Matrix(new double[][]{
                 {1, 2, 3},
                 {4, 5, 6}});
-        assertThrows(IllegalArgumentException.class, () -> matrixA.adjugate());
+        assertThrows(IllegalArgumentException.class,
+                () -> matrixA.adjugate());
     }
 
     /**
@@ -548,5 +562,4 @@ class MatrixTest {
         assertNotEquals(new Matrix(new double[][]{null}), matrixA);
         assertNotEquals(matrixB, matrixA);
     }
-
 }
