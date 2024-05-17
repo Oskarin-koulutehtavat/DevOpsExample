@@ -13,7 +13,7 @@ pipeline {
                 // Run Maven on a Unix agent.
                 withSonarQubeEnv(installationName: 'sonar') {
                     withMaven(maven: 'Maven 3.9.6') {
-                        sh 'mvn -D"skip.tests clean package sonar:sonar'
+                        sh 'mvn -Dskip.tests clean package sonar:sonar'
                     }
                 }
                 // To run Maven on a Windows agent, use bat instead of sh
