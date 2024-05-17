@@ -35,6 +35,7 @@ Asenna nvm hallintatyökalu, jonka avulla asennat viimeisimät versiot node ja n
 ```sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 . /etc/profile
+. ~/.bashrc
 nvm install node
 ```
 
