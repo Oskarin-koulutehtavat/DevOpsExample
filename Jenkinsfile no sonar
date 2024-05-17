@@ -12,9 +12,8 @@ pipeline {
             stage('Maven Build') {
                 steps {
                     // Run Maven on a Unix agent.
-                    withSonarQubeEnv() {
-                        sh 'mvn -D"skip.tests clean package sonar:sonar'
-                    }
+                    sh 'mvn -D"skip.tests clean package sonar:sonar'
+
                     // To run Maven on a Windows agent, use bat instead of sh
                 post {
                     // If Maven was able to compile archive the jar file.
@@ -37,15 +36,6 @@ pipeline {
                     // failed, record the test results.
                     always {
                         junit 'target/surefire-reports/*.xml'
-                    }
-                }
-            }
-            stage("Quality Gate") {
-                steps {
-                    timeout(time: 1, unit: 'HOURS') {
-                        // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-                        // true = set pipeline to UNSTABLE, false = don't
-                        waitForQualityGate abortPipeline: true
                     }
                 }
             }
