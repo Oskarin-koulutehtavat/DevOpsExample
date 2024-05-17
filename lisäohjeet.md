@@ -77,8 +77,6 @@ Jenkinsissä käy asettamassa asetus `GitHub hook trigger for GITScm polling` p�
 
 ![alt text](/images/build-triggers.png)
 
-TODO jenkins scm hook ohje ja kuva
-
 ## Maven Manuaalinen Asennus
 
 Maven asennukseen löytyy scripti. Jos suoritat scriptin, voit jättää välistä seuraavat asennus vaiheet.

@@ -168,6 +168,20 @@ Repossa tulee Jenkinsfile, joka määrittelee pipelinen, sekä pipelinen tarvits
 
 Käytä Jenkinsfile aina `'` merkkijonoihin, sillä `"` hajottaa pipelinen, eikä se osaa kertoa miksi. `"` käyttö merkkijonojen sisällä toimii.
 
+Luodaan uusi pipeline Jenkinsissä
+
+![new item](/images/new-item.png)
+
+![new pipeline](/images/new-pipeline.png)
+
+Lisää pipeline script from SCM ja aseta projektisi git url.
+
+![pipeline definition](/images/pipeline-settings.png)
+
+Nyt voit ajaa pipeline buildin.
+
+<img src="images/success.svg" width="50" alt="success"/>
+
 ## Seuraavaksi
 
 SonarQuben asennus ja käyttöönotto Jenkinsissä löytyy ohjeet [täältä](/sonarqube.md)
