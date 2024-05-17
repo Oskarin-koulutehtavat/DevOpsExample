@@ -33,18 +33,27 @@ Kopiointi pyytää palvelimen käyttäjän salasanaa.
 Asenna nvm hallintatyökalu, jonka avulla asennat viimeisimät versiot node ja npm.
 
 ```sh
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 . /etc/profile
 . ~/.bashrc
 nvm install node
+npm config set prefix /usr/local
+```
+
+Asenna pm2 globaalisti.
+
+```sh
+npm install -g pm2
 ```
 
 Käy hakemassa webhook channel [smee.io](https://smee.io) sivulta. Saat linkin, joka näyttää tältä `https://smee.io/xxxxxxxxxxxxxxxx`.
 
-Tämän jälkeen asenna `smee-client` ja `pm2` käyttäen npm.
+Luo smee kansio johonkin sopivaan paikkaan ja vaihda työhakemisto siihen.
+
+Tämän jälkeen asenna `smee-client`.
 
 ```sh
-npm install -g smee-client pm2
+npm install smee-client
 ```
 
 Smee-client vastaanottaa webhook viestejä, ja pm2 luo prosessin. Luo seuraava .js tiedosto, johon vaihdat source smee linkkisi, ja targetin portin Jenkinsin porttiin, jos olet muuttanut sitä.
