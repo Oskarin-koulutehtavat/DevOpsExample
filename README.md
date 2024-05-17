@@ -110,7 +110,7 @@ Muokkaa jenkinsin työkaluja **Manage Jenkins > Tools**
 
 ![alt text](/images/manage-jenkins-tools.png)
 
-Lisää automaattisesti asentuva Maven
+Lisää automaattisesti asentuva Maven. Nimeä käytetään myöhemmin Jenkinsfile.
 
 ![alt text](/images/add-maven.png)
 
@@ -184,7 +184,7 @@ Nyt voit ajaa pipeline buildin.
 
 ## Seuraavaksi
 
-SonarQuben asennus ja käyttöönotto Jenkinsissä löytyy ohjeet [täältä](/sonarqube.md)
+Ohjeet SonarQuben asennukseen ja käyttöönottoon Jenkinsissä löytyy [täältä](/sonarqube.md).
 
 Voit halutessasi jatkaa [lisäohjeisiin](lisäohjeet.md), jossa käsitellään virtuaalipalvelimia, SSH avainpareja ja GitHub Webhook käyttöä Jenkinsin automatisointiin.
 

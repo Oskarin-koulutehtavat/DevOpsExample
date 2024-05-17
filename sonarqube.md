@@ -202,7 +202,7 @@ Lisää automaattisesti asentuva SonarQube Scanner
 
 ![add sonarqube scanner installation](/images/add-sonar.png)
 
-Seuraavaksi lisäämme luomamme SonarQube token Jenkinsiin **Manage Jenkins > Credentials > System > Global credentials** Global Scope Secret Text tyyppiseksi tunnukseksi.
+Seuraavaksi lisäämme luomamme SonarQube token Jenkinsiin **Manage Jenkins > Credentials > System > Global credentials** Global Scope Secret Text tyyppiseksi tunnukseksi ja anna sille ID, jota käytetään Jenkinsfile.
 
 ![manage jenkins credentials](/images/manage-jenkins-credentials.png)
 
