@@ -59,8 +59,8 @@ pipeline {
             post {
                 // If Maven was able to compile archive the jar file.
                 success {
-                    sh 'docker save -o target/docker_image.tar example/matrix:latest'
-                    archiveArtifacts 'target/docker_image.tar'
+                    sh 'docker save -o target/docker/image.tar example/matrix:latest'
+                    archiveArtifacts 'target/docker/image.tar'
                 }
             }
         }
