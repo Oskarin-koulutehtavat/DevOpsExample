@@ -57,7 +57,7 @@ pipeline {
                 sh 'docker build -t example/matrix:latest .'
             }
             post {
-                // If Maven was able to compile archive the jar file.
+                // If Docker was able to build an image.
                 success {
                     sh 'mkdir -p target/docker'
                     sh 'docker save -o target/docker/image.tar example/matrix:latest'

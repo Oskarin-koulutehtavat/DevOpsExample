@@ -5,38 +5,37 @@ pipeline {
         stage('SCM'){
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/Oskarin-koulutehtavat/matrix.git'
+                git 'https://github.com/Oskarin-koulutehtavat/DevOpsExample.git'
             }
         }
-        withMaven(globalMavenSettingsConfig: '', jdk: '', maven: '', mavenSettingsConfig: '', traceability: true) {
-            stage('Maven Build') {
-                steps {
-                    // Run Maven on a Unix agent.
-                    sh 'mvn -D"skip.tests clean package sonar:sonar'
-
-                    // To run Maven on a Windows agent, use bat instead of sh
-                post {
-                    // If Maven was able to compile archive the jar file.
-                    success {
-                        archiveArtifacts 'target/*.jar'
-                    }
+        stage('Maven Build') {
+            steps {
+                // Run Maven on a Unix agent.
+                withMaven(maven: 'Maven 3.9.6') {
+                    sh 'mvn -Dskip.tests clean package sonar:sonar'
+                }
+                // To run Maven on a Windows agent, use bat instead of sh
+            }
+            post {
+                // If Maven was able to compile archive the jar file.
+                success {
+                    archiveArtifacts 'target/*.jar'
                 }
             }
-            stage('Maven Test') {
-                steps {
-                    // Get some code from a GitHub repository
-                    git 'https://github.com/Oskarin-koulutehtavat/matrix.git'
-
-                    // Run Maven tests.
+        }
+        stage('Maven Test') {
+            steps {
+                // Run Maven tests.
+                withMaven(maven: 'Maven 3.9.6') {
                     sh 'mvn test'
                 }
+            }
 
-                post {
-                    // If Maven was able to run the tests, even if some of the test
-                    // failed, record the test results.
-                    always {
-                        junit 'target/surefire-reports/*.xml'
-                    }
+            post {
+                // If Maven was able to run the tests, even if some of the test
+                // failed, record the test results.
+                always {
+                    junit 'target/surefire-reports/*.xml'
                 }
             }
         }
@@ -45,6 +44,14 @@ pipeline {
                 // Build docker image tagged example/matrix:latest using
                 // the current directory (.) as a build context
                 sh 'docker build -t example/matrix:latest .'
+            }
+            post {
+                // If Docker was able to build an image.
+                success {
+                    sh 'mkdir -p target/docker'
+                    sh 'docker save -o target/docker/image.tar example/matrix:latest'
+                    archiveArtifacts 'target/docker/image.tar'
+                }
             }
         }
     }
