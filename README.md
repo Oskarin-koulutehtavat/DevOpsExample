@@ -41,9 +41,9 @@ Tallennuksen jälkeen suorita `/etc/profile` komennolla
 . /etc/profile
 ```
 
-## Jenkins Asennus
+## Jenkins
 
-### Asennus
+### Jenkinsin Asennus
 
 Lisätään Jenkinsin GPG avain:
 
@@ -68,6 +68,7 @@ sudo apt install jenkins
 ```
 
 ### Jenkinsin Käyttämän Portin Vaihto ja Avaus Palomuurista
+
 Jenkins käyttää oletuksena porttia `8080`. Portin voi vaihtaa tiedostosta `/lib/systemd/system/jenkins.service` ja etsimällä rivin `Environment="JENKINS_PORT=`... ja vaihtamalla portin. Muutokset ladataan seuraavalla komennolla.
 
 ```sh
@@ -80,7 +81,7 @@ Portti pitää avata palomuurista jotta voidaan yhdistää Jenkinsin web käytt�
 sudo ufw allow 8080
 ```
 
-### Käyttöönotto
+### Jenkinsin Käyttöönotto
 
 Jenkinsin web käyttöliittymä löytyy oletuksena portista `8080`. Ensimmäisen kirjautumiskerran admin salasanan voi tarkistaa helpoiten komennolla
 
@@ -116,7 +117,7 @@ Lisää automaattisesti asentuva Maven. Nimeä käytetään myöhemmin Jenkinsfi
 
 ## Docker
 
-### Asennus
+### Dockerin Asennus
 
 Lisätään Dockerin GPG avain:
 
@@ -149,7 +150,7 @@ TODO ryhmä
 
 Luo ryhmä `docker`, lisää käyttäjä `jenkins` siihen, ja lopuksi päivitä ryhmä.
 
-```
+```sh
 sudo groupadd docker
 sudo usermod -aG docker jenkins
 ```
@@ -160,6 +161,13 @@ Aloita Docker daemon komennolla
 
 ```sh
 sudo systemctl start docker
+```
+
+Docker kuvia voi kopioida ja uudelleen käyttöönottaa seuraavilla komennoilla.
+
+```sh
+docker save -o fedora-all.tar fedora
+docker load -i fedora-all.tar
 ```
 
 ## Jenkins Pipeline
@@ -189,9 +197,12 @@ Ohjeet SonarQuben asennukseen ja käyttöönottoon Jenkinsissä löytyy [täält
 Voit halutessasi jatkaa [lisäohjeisiin](lisäohjeet.md), jossa käsitellään virtuaalipalvelimia, SSH avainpareja ja GitHub Webhook käyttöä Jenkinsin automatisointiin.
 
 ## Lähteet
-- [**Jenkins User Handbook**: Installing on Linux ](https://www.jenkins.io/doc/book/installing/linux/)
+
+- [**Jenkins User Handbook**: Installing on Linux](https://www.jenkins.io/doc/book/installing/linux/)
 - [**docker.docs**: Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 - [**docker.docs**: Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall)
+- [**docker.docs**: docker image save](https://docs.docker.com/reference/cli/docker/image/save/)
+- [**docker.docs**: docker image load](https://docs.docker.com/reference/cli/docker/image/load/)
 - [**StackOverflow**: How to set JAVA_HOME in Linux for all users](https://stackoverflow.com/questions/24641536/how-to-set-java-home-in-linux-for-all-users)
 - [**StackOverflow**: How to reload profile settings without logging out and back in again?](https://stackoverflow.com/questions/2518127/how-to-reload-bashrc-settings-without-logging-out-and-back-in-again)
 - [**Microsoft Learn**: Use systemd to manage Linux services with WSL](https://learn.microsoft.com/en-us/windows/wsl/systemd)
