@@ -146,8 +146,6 @@ sudo apt install docker-ce docker-ce-cli containerd.io \
 
 ### Asennuksen Jälkeen
 
-TODO ryhmä
-
 Luo ryhmä `docker`, lisää käyttäjä `jenkins` siihen, ja lopuksi päivitä ryhmä.
 
 ```sh
